@@ -1,0 +1,41 @@
+<div style="text-align:left;width:500px;">
+  <h1>
+    {{ title }}
+  </h1>
+
+  <table *ngIf="arrBirds">
+    <!-- ADD HEADERS -->
+    <tbody>
+      <tr class='trOuter'>
+        <th>ID</th>
+        <th>Name of Bird</th>
+        <th>Type of Bird</th>
+        <th>Scientific Name</th>
+        <th>Regions</th>
+      </tr>
+
+      <!-- BIND ARRAY TO TABLE -->
+      <tr *ngFor="let bird of arrBirds; let i = index">
+        <td>{{bird.ID}}</td>
+        <td>{{bird.Name}}</td>
+        <td>{{bird.Type}} </td>
+        <td>{{bird["Scientific Name"]}}</td>
+        <td>
+          <button *ngIf="bird.Regions" (click)="toggle(i)">{{buttonName[i]}}</button>
+          <table *ngIf="show[i] && bird.Regions" [@enterAnimation]>
+            <tbody>
+              <tr class='trInner'>
+                <th>Region</th>
+                <th>Weather</th>
+              </tr>
+              <tr *ngFor="let region of bird.Regions">
+                <td>{{region.Region}}</td>
+                <td>{{region.Weather}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
